@@ -1,7 +1,7 @@
 use std::ops::{Add, Mul, Sub};
 
-#[derive(PartialEq, Debug, Clone)]
-pub struct Vector(f64, f64, f64);
+#[derive(PartialEq, Debug, Clone, Copy)]
+pub struct Vector(pub f64, pub f64, pub f64);
 
 impl Add for Vector {
   type Output = Self;
@@ -30,12 +30,12 @@ impl Mul<Vector> for Vector {
 
 impl Vector {
   pub fn mag(&self) -> f64 {
-    ((self.clone() * self.clone()) as f64).sqrt()
+    ((*self * *self) as f64).sqrt()
   }
   pub fn normalize(&self) -> Vector {
     let mag = self.mag();
     let div = if mag == 0.0 { std::f64::MAX } else { 1.0 / mag };
-    self.clone() * div
+    *self * div
   }
   pub fn cross(&self, vector: &Vector) -> Vector {
     Vector(

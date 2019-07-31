@@ -1,7 +1,7 @@
 use std::ops::{Add, Mul};
 
-#[derive(PartialEq, Debug, Clone, Default)]
-pub struct Color(f64, f64, f64);
+#[derive(PartialEq, Debug, Clone,Copy, Default)]
+pub struct Color(pub f64, pub f64, pub f64);
 
 impl Add for Color {
   type Output = Self;
