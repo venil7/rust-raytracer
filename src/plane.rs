@@ -7,9 +7,9 @@ use std::rc::Rc;
 
 #[derive(Clone)]
 pub struct Plane {
-  norm: Vector,
-  offset: f64,
-  surface: Rc<dyn Surface>,
+  pub norm: Vector,
+  pub offset: f64,
+  pub surface: Rc<dyn Surface>,
 }
 
 impl Item for Plane {

@@ -7,9 +7,9 @@ use std::rc::Rc;
 
 #[derive(Clone)]
 pub struct Sphere {
-  radius: f64,
-  center: Vector,
-  surface: Rc<dyn Surface>,
+  pub radius: f64,
+  pub center: Vector,
+  pub surface: Rc<dyn Surface>,
 }
 
 impl Item for Sphere {
