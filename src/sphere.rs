@@ -1,17 +1,24 @@
 use crate::scene::Intersection;
 use crate::scene::Item;
 use crate::scene::Ray;
-use crate::scene::Surface;
+use crate::surfaces::Surface;
 use crate::vector::Vector;
+use std::rc::Rc;
 
-#[derive(PartialEq, Debug, Clone, Copy)]
+#[derive(Clone)]
 pub struct Sphere {
   radius: f64,
   center: Vector,
-  surface: Surface,
+  surface: Rc<dyn Surface>,
 }
 
 impl Item for Sphere {
+  fn normal(&self, pos: Vector) -> Vector {
+    (pos - self.center).normalize()
+  }
+  fn surface(&self) -> Rc<dyn Surface> {
+    self.surface.clone()
+  }
   fn intersect(&self, ray: Ray) -> Option<Intersection> {
     let eo = self.center - ray.start;
     let v = eo * ray.dir;
@@ -28,14 +35,8 @@ impl Item for Sphere {
       Some(Intersection {
         ray,
         dist,
-        item: Box::new(*self),
+        item: Rc::new(self.clone()),
       })
     }
-  }
-  fn normal(&self, pos: Vector) -> Vector {
-    (pos - self.center).normalize()
-  }
-  fn surface(&self) -> Surface {
-    self.surface
   }
 }
