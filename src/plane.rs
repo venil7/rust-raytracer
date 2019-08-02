@@ -19,14 +19,14 @@ impl Item for Plane {
   fn surface(&self) -> Rc<dyn Surface> {
     self.surface.clone()
   }
-  fn intersect(&self, ray: Ray) -> Option<Intersection> {
+  fn intersect(&self, ray: &Ray) -> Option<Intersection> {
     let denom = self.norm * ray.dir;
     if denom > 0. {
       None
     } else {
       let dist = ((self.norm * ray.start) + self.offset) / (-1. * denom);
       Some(Intersection {
-        ray,
+        ray: ray.clone(),
         dist,
         item: Rc::new(self.clone()),
       })

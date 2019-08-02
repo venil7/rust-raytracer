@@ -19,7 +19,7 @@ impl Item for Sphere {
   fn surface(&self) -> Rc<dyn Surface> {
     self.surface.clone()
   }
-  fn intersect(&self, ray: Ray) -> Option<Intersection> {
+  fn intersect(&self, ray: &Ray) -> Option<Intersection> {
     let eo = self.center - ray.start;
     let v = eo * ray.dir;
     let mut dist = 0.;
@@ -33,7 +33,7 @@ impl Item for Sphere {
       None
     } else {
       Some(Intersection {
-        ray,
+        ray : ray.clone(),
         dist,
         item: Rc::new(self.clone()),
       })

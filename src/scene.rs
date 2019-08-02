@@ -14,6 +14,7 @@ pub struct Ray {
   pub dir: Vector,
 }
 
+#[derive(Clone)]
 pub struct Intersection {
   pub item: Rc<dyn Item>,
   pub ray: Ray,
@@ -21,7 +22,7 @@ pub struct Intersection {
 }
 
 pub trait Item {
-  fn intersect(&self, ray: Ray) -> Option<Intersection>;
+  fn intersect(&self, ray: &Ray) -> Option<Intersection>;
   fn normal(&self, pos: Vector) -> Vector;
   fn surface(&self) -> Rc<dyn Surface>;
 }
