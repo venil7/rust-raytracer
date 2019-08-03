@@ -1,6 +1,6 @@
 use std::ops::{Add, Mul};
 
-#[derive(PartialEq, Debug, Clone,Copy, Default)]
+#[derive(PartialEq, Debug, Clone, Copy, Default)]
 pub struct Color(pub f64, pub f64, pub f64);
 
 impl Add for Color {
@@ -33,6 +33,16 @@ impl Color {
   }
   pub fn background() -> Color {
     Color::black()
+  }
+}
+
+impl Into<[u8; 3]> for Color {
+  fn into(self) -> [u8; 3] {
+    [
+      (self.0 * 255.) as u8,
+      (self.1 * 255.) as u8,
+      (self.2 * 255.) as u8,
+    ]
   }
 }
 
