@@ -115,4 +115,23 @@ impl Raytracer {
       }
     })
   }
+
+  pub fn render(&self, scene: &Scene, width: usize, height: usize) -> Vec<Color> {
+    (0..width * height)
+      .map(|idx| {
+        let camera = scene.camera;
+        let x = idx / width;
+        let y = idx % width;
+        let recenter_x = (x as f64 - (width as f64 / 2.)) / 2. / width as f64;
+        let recenter_y = (y as f64 - (height as f64 / 2.)) / 2. / height as f64;
+        let dir =
+          (camera.right * recenter_x + (camera.up * recenter_y) + camera.forward).normalize();
+        let ray = Ray {
+          start: camera.position,
+          dir: dir,
+        };
+        self.trace_ray(&ray, scene, 0)
+      })
+      .collect::<Vec<Color>>()
+  }
 }
