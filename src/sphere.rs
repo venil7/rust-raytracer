@@ -13,8 +13,8 @@ pub struct Sphere {
 }
 
 impl Item for Sphere {
-  fn normal(&self, pos: Vector) -> Vector {
-    (pos - self.center).normalize()
+  fn normal(&self, pos: &Vector) -> Vector {
+    (*pos - self.center).normalize()
   }
   fn surface(&self) -> Rc<dyn Surface> {
     self.surface.clone()
@@ -33,7 +33,7 @@ impl Item for Sphere {
       None
     } else {
       Some(Intersection {
-        ray : ray.clone(),
+        ray: ray.clone(),
         dist,
         item: Rc::new(self.clone()),
       })

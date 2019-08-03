@@ -13,7 +13,7 @@ pub struct Plane {
 }
 
 impl Item for Plane {
-  fn normal(&self, _pos: Vector) -> Vector {
+  fn normal(&self, _pos: &Vector) -> Vector {
     self.norm
   }
   fn surface(&self) -> Rc<dyn Surface> {

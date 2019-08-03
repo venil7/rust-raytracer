@@ -31,6 +31,9 @@ impl Color {
   pub fn black() -> Color {
     Color::default()
   }
+  pub fn background() -> Color {
+    Color::black()
+  }
 }
 
 #[test]

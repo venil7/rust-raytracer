@@ -23,7 +23,7 @@ pub struct Intersection {
 
 pub trait Item {
   fn intersect(&self, ray: &Ray) -> Option<Intersection>;
-  fn normal(&self, pos: Vector) -> Vector;
+  fn normal(&self, pos: &Vector) -> Vector;
   fn surface(&self) -> Rc<dyn Surface>;
 }
 
