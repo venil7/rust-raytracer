@@ -39,10 +39,12 @@ pub struct Scene {
   pub camera: Camera,
 }
 
-impl Default for Scene {
-  fn default() -> Scene {
+// impl Default for Scene {
+impl Scene {
+  pub fn default(camera_position: &Vector) -> Scene {
     Scene {
-      camera: Camera::new(Vector(3., 2., 4.), Vector(-1., 0.5, 0.)),
+      // camera: Camera::new(Vector(3., 2., 4.), Vector(-1., 0.5, 0.)),
+      camera: Camera::new(*camera_position, Vector(0., 0., 0.)),
       lights: vec![
         Light {
           pos: Vector(-2.0, 2.5, 0.),
