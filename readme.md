@@ -4,4 +4,4 @@ Loosely based on [Microsoft TypeScript Raytracer](https://github.com/Microsoft/T
 
 Can generate images like this :)
 
-![ray-trace-gif](./out.gif)
+![ray-trace-gif](./out640.gif)

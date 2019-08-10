@@ -15,6 +15,10 @@ pub mod sphere;
 pub mod surfaces;
 pub mod vector;
 
+pub fn degree_to_rad(deg: f64) -> f64 {
+    deg * 0.01745329
+}
+
 pub fn coords_for_angle(radius: f64, angle: f64, z: f64) -> Vector {
     let x = radius * angle.cos() + 0.;
     let y = radius * angle.sin() + 0.;
@@ -23,8 +27,8 @@ pub fn coords_for_angle(radius: f64, angle: f64, z: f64) -> Vector {
 
 pub fn render_scene(scene: &Scene, fname: &str) -> std::io::Result<()> {
     let raytracer = Raytracer;
-    let width = 320;
-    let height = 240;
+    let width = 640;
+    let height = 480;
     let colors = raytracer.render(scene, width, height);
     let bytes = colors
         .iter()
@@ -41,9 +45,9 @@ pub fn render_scene(scene: &Scene, fname: &str) -> std::io::Result<()> {
 
 fn main() -> Result<(), std::io::Error> {
     for i in 0..359 {
-        let camera_vector = coords_for_angle(15., i as f64, 15.);
+        let camera_vector = coords_for_angle(6., degree_to_rad(i as f64), 6.);
         let scene = Scene::default(&camera_vector);
-        render_scene(&scene, &format!("render-{:03}.png", i))?
+        render_scene(&scene, &format!("out/render-{:03}.png", i))?
     }
     Ok(())
 }
